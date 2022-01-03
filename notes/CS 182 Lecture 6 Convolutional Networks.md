@@ -56,5 +56,47 @@ Some people think that strided convolutions are just as good as conv + pooling
 
 
 
-AlexNet 2012: first neural network to attain state-of-the-art results on the ImageNet large-scale visual recognition challenge (ILSVRC)
+$(W - F  + 2P) / S +1$ 
+
+(width - filter + 2 padding) / stride + 1
+
+
+
+## AlexNet 2012 - a model of art
+
+- first neural network to attain state-of-the-art results on the ImageNet large-scale visual recognition challenge (ILSVRC) 
+- 1.5 million images 1000 categories
+- 3 x 224 x 224 $\rightarrow$ Conv1: 11x11x96 Stride 4 without zero padding
+- quiz: how many parameters in Conv1?
+  - Weights: 11x11x3x96
+  - Biases: 96
+  - Total: 34,944
+- Pool1: 3x3x96, Stride 2
+- Norm1: local normalization layer
+- Conv2: 5x5x256, Stride 1, **with** zero padding
+- ....
+  - filter does down, depth goes up
+  - the first layer has a big image, losing a few pixels off the sides was not a big deal. but by the time we have 13x13, would potentially miss out useful information
+
+
+
+## VGG - model of engineering, 19 layers
+
+- motif repeated multiple times as a way to increase the **depth** of your model
+- "homogeneous" stacks of multiple convolutions interspersed with resolution reduction
+
+
+
+## ResNet, 152 layers
+
+- As the number of layers increases, accuracy continues to improve
+- **Main idea:** $x \rightarrow \text{weight layer} \rightarrow \text{relu} \rightarrow \text{weight layer} \xrightarrow{+x} =H(x) \rightarrow \text{relu}$
+  - $H(x) = F(x) + x$
+- Why good?
+  - Why are deep neural networks hard to train? If we multiply many many derivatives together, we get zero or infinity. We only get a reasonable answer if the numbers are all close to 1!
+  - Want $J_i \approx I$
+  - ReLU: $(\dfrac{df}{dz})_i = \text{Ind}(z_i \geq 0)$
+  - $\dfrac{dH}{dx} = \dfrac{dF}{dx} + I$ 
+
+
 
