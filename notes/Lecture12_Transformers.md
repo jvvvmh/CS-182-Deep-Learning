@@ -20,6 +20,8 @@ weighted: $\sum_{i} \alpha_{1,i} v_i$
 
 x -> self-attention layer -> a -> self-attention layer -> ... decode
 
+
+
 ## Positional encoding
 
 Address lack of sequence information; otherwise, change the order, transformer gives the same answer
@@ -51,7 +53,11 @@ $h_t = f(x_t, t)$
 
 $\text{emb}(x_t) + p_t$ or concatenate them
 
+
+
 ## Multi-headed attention
+
+(类比cnn, multi filters)
 
 allows query multiple positions at each layer
 
@@ -93,7 +99,28 @@ in practice: replace $\exp(e_{l,t})$ with 0 if $l < t$ inside the softmax
 
 
 
+## Layer Normalization
+
+batch norm is hard to use with sequence models
+
+- sequences are of different lengths
+- sequences can be very long, so sometimes have small batches
+
+Layer normalization: across different dimensions of $a_t$
+
+Add & Norm: a = LayerNorm(h + a) 
+
+![image-20220201215638172](C:\Users\jvmh\AppData\Roaming\Typora\typora-user-images\image-20220201215638172.png)
 
 
 
+Transformer $O(n^2)$ vs $O(n)$
+
+benefits:
+
+(1) much better long-range connections
+
+(2) much easier to parallelize
+
+(3) can make ti deep (more layers) than RNNs (3->6)
 
