@@ -28,6 +28,8 @@ idea: train a language model, run it on a sentence, use its hidden state
 
 ### ELMo
 
+**bidirectional LSTM model used for context-dependent embeddings**
+
 - train separately forward language model & backward LM
 - predict the next (or previous) word
 
@@ -37,7 +39,31 @@ This provides a context specific and semantically meaningful representation of e
 
 
 
+## BERT and Friends
 
+**transformer language model used for context-dependent embeddings**
+
+bidirectional transformer LMs
+
+- randomly mask out some input tokens. mask = replace with [MASK]
+- idea: needing to predict missing words forces the model to work hard to learn a good representation.
+
+**Bert** is essentially the "encoder" part of a transformer with 15% of inputs replaced with [MASK]
+
+train: two sentences, cls, sep
+
+1. randomly replace 15% of the tokens with [MASK]
+2. randomly swap the order of the sentences 50% of the time.
+
+use bert to get features: concat last four hidden
+
+
+
+### GPT:
+
+decoder of transformer without cross attention.
+
+forward model -> generation task
 
 
 
